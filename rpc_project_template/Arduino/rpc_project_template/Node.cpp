@@ -11,7 +11,11 @@ void Node::begin() {
   state_.validator_.set_node(*this);
   // Start Serial after loading config to set baud rate.
 #if !defined(DISABLE_SERIAL)
-  Serial.begin(config_._.baud_rate);
+  //Serial.begin(config_._.baud_rate);
+  /* Hard code baud rate, since configurable baud rate may lead to trouble
+   * connecting in the case where the baud rate is initialized to an undefined
+   * value. */
+  Serial.begin(115200);
 #endif  // #ifndef DISABLE_SERIAL
   // Set i2c clock-rate to 400kHz.
   TWBR = 12;
