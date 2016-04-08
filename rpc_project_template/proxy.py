@@ -24,7 +24,7 @@ try:
 
         @property
         def state(self):
-            from .config import State
+            from .state import State
 
             return State.FromString(self.serialize_state().tostring())
 
@@ -58,7 +58,7 @@ try:
             return return_code
 
         def update_state(self, **kwargs):
-            from .config import State
+            from .state import State
 
             state = State(**kwargs)
             return super(ProxyMixin, self).update_state(state)

@@ -22,8 +22,10 @@ build/*
 arduino_rpc/protobuf_commands.py
 .ipynb_checkpoints
 */node.py
+*/state.py
 */config.py
 *~
 *.swp
 .project
 .pydevproject
+.idea

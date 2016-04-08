@@ -22,6 +22,7 @@
 #include "rpc_project_template_config_validate.h"
 #include "rpc_project_template_state_validate.h"
 #include "RpcProjectTemplate/config_pb.h"
+#include "RpcProjectTemplate/state_pb.h"
 
 
 namespace rpc_project_template {
