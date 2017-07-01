@@ -1,0 +1,36 @@
+# source will be downloaded prior to filling in jinja templates
+# Example assumes that this folder has setup.py in it
+source:
+  git_url: ../
+
+package:
+  name: rpc-project-template
+{% if GIT_DESCRIBE_NUMBER > '0' %}
+  version: {{ GIT_DESCRIBE_TAG[1:] }}.post{{ GIT_DESCRIBE_NUMBER }}
+{% else %}
+  version: {{ GIT_DESCRIBE_TAG[1:] }}.0
+{% endif %}
+
+requirements:
+  build:
+    - arduino-rpc >=1.8.post1
+    - future
+    - paver
+    - pip
+    - platformio-framework-arduinoavr
+    - platformio-helpers
+    - platformio-tool-avrdude
+    - platformio-tool-scons
+    - platformio-toolchain-atmelavr
+    - python 2.7*
+
+  run:
+    - arduino-rpc >=1.8.post1
+    - python 2.7*
+    - platformio-helpers
+    - platformio-tool-avrdude
+    - platformio-tool-scons
+
+about:
+  home: https://github.com/wheeler-microfluidics/base-node-rpc
+  license: MIT

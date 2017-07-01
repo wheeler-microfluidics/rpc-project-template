@@ -2,8 +2,10 @@ from collections import OrderedDict
 import sys
 from importlib import import_module
 
-from paver.easy import task, needs, path, sh, cmdopts, options
-from paver.setuputils import setup, find_package_data, install_distutils_tasks
+from paver.easy import path, options
+from paver.setuputils import install_distutils_tasks
+import platformio_helpers as pioh
+import platformio_helpers.develop
 try:
     from base_node_rpc.pavement_base import *
 except ImportError:
@@ -17,9 +19,7 @@ import version
 install_distutils_tasks()
 
 DEFAULT_ARDUINO_BOARDS = ['uno']
-PROJECT_PREFIX = [d for d in path('.').dirs()
-                  if d.joinpath('Arduino').isdir()
-                  and d.name not in ('build', )][0].name
+PROJECT_PREFIX = 'rpc_project_template'
 module_name = PROJECT_PREFIX
 package_name = module_name.replace('_', '-')
 rpc_module = import_module(PROJECT_PREFIX)
@@ -63,3 +63,27 @@ options(
                install_requires=['base-node-rpc>=0.12.post23'],
                include_package_data=True,
                packages=[str(PROJECT_PREFIX)]))
+
+@task
+def develop_link():
+    import logging; logging.basicConfig(level=logging.INFO)
+    pioh.develop.link(working_dir=path('.').realpath(),
+                      package_name=package_name)
+
+
+@task
+def develop_unlink():
+    import logging; logging.basicConfig(level=logging.INFO)
+    pioh.develop.unlink(working_dir=path('.').realpath(),
+                        package_name=package_name)
+
+
+@task
+@needs('generate_all_code')
+def build_firmware():
+    sh('pio run')
+
+
+@task
+def upload():
+    sh('pio run --target upload --target nobuild')
