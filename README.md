@@ -1,3 +1,4 @@
+![https://ci.appveyor.com/api/projects/status/github/wheeler-microfluidics/rpc-project-template?branch=master&svg=true](https://ci.appveyor.com/api/projects/status/github/wheeler-microfluidics/rpc-project-template?branch=master&svg=true)
 # rpc-project-template #
 
 Template package for remote procedure call (RPC) project, utilizing
